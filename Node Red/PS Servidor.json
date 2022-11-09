@@ -1,0 +1,193 @@
+[
+    {
+        "id": "2837b308c0f8573e",
+        "type": "tab",
+        "label": "PS Servidor",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c6a428537eae72e4",
+        "type": "http in",
+        "z": "2837b308c0f8573e",
+        "name": "",
+        "url": "/vagas_ocupadas",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 380,
+        "y": 180,
+        "wires": [
+            [
+                "50c8e2dca764222a"
+            ]
+        ]
+    },
+    {
+        "id": "50c8e2dca764222a",
+        "type": "change",
+        "z": "2837b308c0f8573e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "vagas_ocupadas",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 180,
+        "wires": [
+            [
+                "8ee7ba27fbf21bbb"
+            ]
+        ]
+    },
+    {
+        "id": "8ee7ba27fbf21bbb",
+        "type": "http response",
+        "z": "2837b308c0f8573e",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 870,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b6ed07be7cdfc2ff",
+        "type": "mqtt in",
+        "z": "2837b308c0f8573e",
+        "name": "",
+        "topic": "vagas_ocupadas",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "1b7cbc63254c581a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 360,
+        "y": 340,
+        "wires": [
+            [
+                "09772b289705be47"
+            ]
+        ]
+    },
+    {
+        "id": "09772b289705be47",
+        "type": "change",
+        "z": "2837b308c0f8573e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "vagas_ocupadas",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "97c3280b8a98cd1d",
+        "type": "http in",
+        "z": "2837b308c0f8573e",
+        "name": "",
+        "url": "/status_vagas",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 370,
+        "y": 500,
+        "wires": [
+            [
+                "be8a301ac3996cb7"
+            ]
+        ]
+    },
+    {
+        "id": "be8a301ac3996cb7",
+        "type": "change",
+        "z": "2837b308c0f8573e",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "status_vagas",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 500,
+        "wires": [
+            [
+                "eefa016deb7dfc85"
+            ]
+        ]
+    },
+    {
+        "id": "eefa016deb7dfc85",
+        "type": "http response",
+        "z": "2837b308c0f8573e",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 950,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "1b7cbc63254c581a",
+        "type": "mqtt-broker",
+        "name": "Broker MQTT",
+        "broker": "broker.mqttdashboard.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]

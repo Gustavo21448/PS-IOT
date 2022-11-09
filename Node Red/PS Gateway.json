@@ -1,0 +1,243 @@
+[
+    {
+        "id": "ccb9df2390d1ba24",
+        "type": "tab",
+        "label": "PS Gateway",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "15f5c3f29d2aaf16",
+        "type": "function",
+        "z": "ccb9df2390d1ba24",
+        "name": "function 11",
+        "func": "msg.payload = { value: msg.payload.vagas_ocupadas}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 180,
+        "wires": [
+            [
+                "1e8922816a7687ae"
+            ]
+        ]
+    },
+    {
+        "id": "1e8922816a7687ae",
+        "type": "mqtt out",
+        "z": "ccb9df2390d1ba24",
+        "name": "",
+        "topic": "vagas_ocupadas",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "1b7cbc63254c581a",
+        "x": 890,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "e1f1dfe9dedf843a",
+        "type": "debug",
+        "z": "ccb9df2390d1ba24",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "8395b4a20bf56e65",
+        "type": "mqtt in",
+        "z": "ccb9df2390d1ba24",
+        "name": "",
+        "topic": "vagas_ocupadas",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "1b7cbc63254c581a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 600,
+        "y": 300,
+        "wires": [
+            [
+                "e1f1dfe9dedf843a"
+            ]
+        ]
+    },
+    {
+        "id": "7b02bf66fe406875",
+        "type": "mqtt out",
+        "z": "ccb9df2390d1ba24",
+        "name": "",
+        "topic": "status_vagas",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "1b7cbc63254c581a",
+        "x": 890,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "91dc5c028489ae65",
+        "type": "comment",
+        "z": "ccb9df2390d1ba24",
+        "name": "Total de vagas ocupadas",
+        "info": "",
+        "x": 630,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "b267a403a12031ab",
+        "type": "comment",
+        "z": "ccb9df2390d1ba24",
+        "name": "Status das vagas",
+        "info": "",
+        "x": 440,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "5fd5d69309be487f",
+        "type": "inject",
+        "z": "ccb9df2390d1ba24",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"vaga_a\":0,\"vaga_b\":1,\"vagas_ocupadas\":1}",
+        "payloadType": "json",
+        "x": 90,
+        "y": 340,
+        "wires": [
+            [
+                "15f5c3f29d2aaf16",
+                "d77e34d15de1ddd7"
+            ]
+        ]
+    },
+    {
+        "id": "14a03587859f2091",
+        "type": "serial in",
+        "z": "ccb9df2390d1ba24",
+        "name": "",
+        "serial": "b5a049058252ba70",
+        "x": 90,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d77e34d15de1ddd7",
+        "type": "function",
+        "z": "ccb9df2390d1ba24",
+        "name": "Verificador",
+        "func": "if (msg.payload.vaga_a == 0 && msg.payload.vaga_b == 1) {\n    msg.payload.vaga_a = \"A\";\n    msg.payload = msg.payload.vaga_a;\n} \nif (msg.payload.vaga_b == 0 && msg.payload.vaga_a == 1){\n    msg.payload.vaga_b = \"B\";\n    msg.payload = msg.payload.vaga_b;\n} \nif (msg.payload.vaga_a == 0 && msg.payload.vaga_b == 0){\n    msg.payload = \"AB\"\n} \nif(msg.payload.vaga_a == 1 && msg.payload.vaga_b == 1){\n    msg.payload = \"X\"\n}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 500,
+        "wires": [
+            [
+                "7b02bf66fe406875",
+                "85ad9af431dea35f"
+            ]
+        ]
+    },
+    {
+        "id": "85ad9af431dea35f",
+        "type": "debug",
+        "z": "ccb9df2390d1ba24",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 640,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "1b7cbc63254c581a",
+        "type": "mqtt-broker",
+        "name": "Broker MQTT",
+        "broker": "broker.mqttdashboard.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "b5a049058252ba70",
+        "type": "serial-port",
+        "serialport": "COM1",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    }
+]
